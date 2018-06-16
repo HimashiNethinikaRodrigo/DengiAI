@@ -28,11 +28,12 @@ print("SJ" + str(mean_absolute_error(sj_y_test, sj_predict_value)))
 print("IQ " + str(mean_absolute_error(iq_y_test, iq_predict_value)))
 
 sj_test, iq_test, sj_test_label, iq_test_label = model_2_preprocess.preprocess('../data/dengue_features_test.csv')
-
 sj_predictions = sj_model.predict(sj_test).astype(int)
 iq_predictions = iq_model.predict(iq_test).astype(int)
 
 submission = pd.read_csv("../data/submission_format.csv")
+
 submission.total_cases = np.concatenate([sj_predictions, iq_predictions])
+
 submission.to_csv("../result/submission_2.csv")
 

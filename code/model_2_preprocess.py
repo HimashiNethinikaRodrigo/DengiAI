@@ -19,7 +19,6 @@ def preprocess(data_file, labels_file=None):
     for i in range(1, 5):
         df['quarter_' + str(i)] = df['week_start_date'].apply(lambda date: 1 if (
                 ((i - 1) * 3 < date.to_datetime().month) and (date.to_datetime().month <= i * 3)) else 0)
-        print('quarter_' + str(i))
         features.append('quarter_' + str(i))
 
     df = df.drop(['week_start_date'], axis=1)
