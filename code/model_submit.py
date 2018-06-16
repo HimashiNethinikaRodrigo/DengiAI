@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 
-feature = pd.read_csv('./dengue_features_train.csv', infer_datetime_format=True)
-label = pd.read_csv('./dengue_labels_train.csv')
+feature = pd.read_csv('../data/dengue_features_train.csv', infer_datetime_format=True)
+label = pd.read_csv('../data/dengue_labels_train.csv')
 
 df = pd.merge(feature, label, how='outer', on=label.columns.tolist()[:-1])
 
@@ -108,7 +108,7 @@ rf_iq_lag = RandomForestRegressor(max_features=10, min_samples_split=4, n_estima
                                   min_samples_leaf=45)
 
 # Check
-test = pd.read_csv('./dengue_features_test.csv')
+test = pd.read_csv('../data/dengue_features_test.csv')
 test = test.join(pd.get_dummies(test.city))
 
 sj, iq = processing_function(df)
@@ -139,7 +139,7 @@ result.iloc[ :2, -1] = first_2_cases
 
 result.total_cases = result.total_cases.astype(int)
 
-result.to_csv('submission.csv', index=False)
+result.to_csv('../result/submission_1.csv', index=False)
 
 
 
